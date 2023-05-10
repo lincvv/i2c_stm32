@@ -29,11 +29,11 @@ typedef enum {
 } I2C_Status_Type;
 
 
-void I2C1_Start(void);
-void I2C1_Stop(void);
-I2C_Status_Type I2C1_SendAddress(uint8_t address, I2C_Direction_Type direction);
-void I2C1_SendData(uint8_t data);
-uint8_t I2C1_ReceiveData(I2C_Acknowledge_Type acknowledge);
+void I2C2_Start(void);
+void I2C2_Stop(void);
+I2C_Status_Type I2C2_SendAddress(uint8_t address, I2C_Direction_Type direction);
+void I2C2_SendData(uint8_t data);
+uint8_t I2C2_ReceiveData(I2C_Acknowledge_Type acknowledge);
 
 #ifdef __cplusplus
 }

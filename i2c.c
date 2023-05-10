@@ -13,7 +13,7 @@ extern I2C_HandleTypeDef hi2c2;
 /**
  *
  * @brief Read data from device i2c.
- * @note the default use is I2C1(CMSIS)
+ * @note the default use is I2C2(CMSIS)
 
  * @param slave_addr Address of the slave device
  * @param addr Register address
@@ -21,30 +21,30 @@ extern I2C_HandleTypeDef hi2c2;
  * @param data Pointer to data buffer
  *
  */
-void read_i2c1(uint8_t slave_addr, uint8_t addr, uint8_t size, uint8_t *data)
+void read_i2c2(uint8_t slave_addr, uint8_t addr, uint8_t size, uint8_t *data)
 {
     // I2C Send
-    I2C1_Start();
-    I2C1_SendAddress(slave_addr, I2C_TRANSMITTER);
-    I2C1_SendData(addr);
+    I2C2_Start();
+    I2C2_SendAddress(slave_addr, I2C_TRANSMITTER);
+    I2C2_SendData(addr);
 
     // I2C Receive
     uint8_t count = 0;
-    I2C1_Start();
-    I2C1_SendAddress(slave_addr, I2C_RECEIVER);
+    I2C2_Start();
+    I2C2_SendAddress(slave_addr, I2C_RECEIVER);
 
     for (count = 0; count < size - 1; ++count ) {
-        data[count] = I2C1_ReceiveData(I2C_ACK);
+        data[count] = I2C2_ReceiveData(I2C_ACK);
     }
 
-    I2C1_Stop();
-    data[count] = I2C1_ReceiveData(I2C_NACK);
+    I2C2_Stop();
+    data[count] = I2C2_ReceiveData(I2C_NACK);
 }
 
 /**
  *
  * @brief Write data to device i2c.
- * @note the default use is I2C1(CMSIS)
+ * @note the default use is I2C2(CMSIS)
 
  * @param slave_addr Address of the slave device
  * @param addr Register address
@@ -53,18 +53,18 @@ void read_i2c1(uint8_t slave_addr, uint8_t addr, uint8_t size, uint8_t *data)
  *
  */
 
-void write_i2c1(uint8_t slave_addr, uint8_t addr, uint8_t size, uint8_t *data)
+void write_i2c2(uint8_t slave_addr, uint8_t addr, uint8_t size, uint8_t *data)
 {
     // I2C Send
-    I2C1_Start();
-    I2C1_SendAddress(slave_addr, I2C_TRANSMITTER);
-    I2C1_SendData(addr);
+    I2C2_Start();
+    I2C2_SendAddress(slave_addr, I2C_TRANSMITTER);
+    I2C2_SendData(addr);
 
     for (int8_t i = 0; i < size; ++i) {
-        I2C1_SendData(data[i]);
+        I2C2_SendData(data[i]);
     }
 
-    I2C1_Stop();
+    I2C2_Stop();
 }
 
 /**

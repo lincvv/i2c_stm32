@@ -1,7 +1,7 @@
 #include "i2c_cmsis.h"
 
 
-void I2C1_Start() {
+void I2C2_Start() {
 
 	//while ((I2C1->SR2 & I2C_SR2_BUSY));			// 1: Communication ongoing on the bus
 
@@ -13,14 +13,14 @@ void I2C1_Start() {
 	);
 }
 
-void I2C1_Stop() {
+void I2C2_Stop() {
 
 	I2C2->CR1 |= I2C_CR1_STOP;						// 1: Stop generation after the current byte transfer or after the current Start condition is sent.
 
 	while((I2C2->SR1 & I2C_SR1_STOPF));				// 1: Stop condition detected
 }
 
-I2C_Status_Type I2C1_SendAddress(uint8_t address, I2C_Direction_Type direction) {
+I2C_Status_Type I2C2_SendAddress(uint8_t address, I2C_Direction_Type direction) {
 
 	uint32_t timeout = 1000000;
 
@@ -52,7 +52,7 @@ I2C_Status_Type I2C1_SendAddress(uint8_t address, I2C_Direction_Type direction) 
 	return I2C_OK;
 }
 
-void I2C1_SendData(uint8_t data) {
+void I2C2_SendData(uint8_t data) {
 
     I2C2->DR = data;
 
@@ -64,7 +64,7 @@ void I2C1_SendData(uint8_t data) {
 	);
 }
 
-uint8_t I2C1_ReceiveData(I2C_Acknowledge_Type acknowledge) {
+uint8_t I2C2_ReceiveData(I2C_Acknowledge_Type acknowledge) {
 
 	if (acknowledge == I2C_ACK) {
         I2C2->CR1 |= I2C_CR1_ACK;					// 1: Acknowledge returned after a byte is received (matched address or data)
